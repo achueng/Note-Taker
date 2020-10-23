@@ -1,7 +1,7 @@
 // Require modules
 const express = require("express");
 const fs = require("fs");
-const path = require("path");
+const routes = require("./routes.js");
 
 // Define the PORT this server will be using
 const PORT = process.env.PORT || 4000;
