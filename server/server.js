@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Define the PORT this server will be using
-const PORT = 4623;
+const PORT = process.env.PORT || 4000;
 
 // Set up express to handle data parsing
 const app = express();
