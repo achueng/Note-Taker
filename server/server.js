@@ -13,3 +13,12 @@ app.use(express.json());
 
 // Routes will take in app as an arguement to run .get() on app
 routes(app);
+
+// Post requests will go here
+
+//Get requests will go here
+
+// Set listen function on the PORT
+app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
