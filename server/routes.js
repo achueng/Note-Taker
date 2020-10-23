@@ -1,5 +1,5 @@
 const path = require("path");
-const sendDir = path.resolve(__dirname, "/..", "/public");
+const sendDir = path.join(__dirname, "/../public");
 
 function routes(server) {
     server.get("/", function(req, res) {
