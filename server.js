@@ -24,10 +24,34 @@ app.post("/api/notes", function(req, res) {
         const noteList = JSON.parse(data);
         noteList.push(req.body);
         // console.log(noteList);
+        // Loop over updated array, and create a new key value pair with a property 'id', and a value of the index of each individual note object
+        noteList.map(note => {
+            note.id = noteList.indexOf(note);
+        });
+        // console.log(noteList);
+        const newNoteList = JSON.stringify(noteList);
+        // Write the new data to db.json
+        fs.writeFile("./db/db.json", newNoteList, function(error) {
+            if(error) throw error;
+            // console.log("Success!");
+            res.json(newNoteList);
+        })
     })
 });
 
 // Get requests will go here
+app.get("/api/notes", function(req, res){
+    // console.log("Yes!");
+    fs.readFile("./db/db.json", "utf8", function(error, data){
+        // console.log(data);
+        if (error) throw error;
+        res.json(JSON.parse(data));
+    })
+})
+
+// Delete requests will go here
+// Something to do with id -> path: /api/notes/:id
+// 
 
 // Set listen function on the PORT
 app.listen(PORT, function() {
