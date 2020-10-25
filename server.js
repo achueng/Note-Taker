@@ -27,12 +27,18 @@ app.post("/api/notes", function(req, res) {
         // Write the new data to db.json
         fs.writeFile("./db/db.json", JSON.stringify(noteList), function(error) {
             if(error) throw error;
-            console.log("Success!");
+            // console.log("Success!");
         })
     })
 });
 
 // Get requests will go here
+app.get("/api/notes", function(req, res){
+    // console.log("Yes!");
+    fs.readFile("./db/db.json", "utf8", function(error, data){
+        console.log(data);
+    })
+})
 
 // Set listen function on the PORT
 app.listen(PORT, function() {
