@@ -36,7 +36,9 @@ app.post("/api/notes", function(req, res) {
 app.get("/api/notes", function(req, res){
     // console.log("Yes!");
     fs.readFile("./db/db.json", "utf8", function(error, data){
-        console.log(data);
+        // console.log(data);
+        if (error) throw error;
+        res.json(JSON.parse(data));
     })
 })
 
