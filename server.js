@@ -20,6 +20,10 @@ app.post("/api/notes", function(req, res) {
     fs.readFile("./db/db.json", "utf8", function(error, data) {
         if(error) throw error;
         // console.log(data);
+        // Parse data to manipulate the array
+        const noteList = JSON.parse(data);
+        noteList.push(req.body);
+        // console.log(noteList);
     })
 });
 
