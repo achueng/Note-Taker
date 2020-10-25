@@ -24,6 +24,11 @@ app.post("/api/notes", function(req, res) {
         const noteList = JSON.parse(data);
         noteList.push(req.body);
         // console.log(noteList);
+        // Write the new data to db.json
+        fs.writeFile("./db/db.json", JSON.stringify(noteList), function(error) {
+            if(error) throw error;
+            console.log("Success!");
+        })
     })
 });
 
