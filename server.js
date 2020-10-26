@@ -22,10 +22,7 @@ app.post("/api/notes", function(req, res) {
         // Parse data to manipulate the array
         const noteList = JSON.parse(data);
         noteList.push(req.body);
-        // Loop over updated array, and create a new key value pair with a property 'id', and a value of the index of each individual note object
-        noteList.map(note => {
-            note.id = noteList.indexOf(note);
-        });
+        // Stringify data to let it be written to the db.json file
         const newNoteList = JSON.stringify(noteList);
         // Write the new data to db.json
         fs.writeFile("./db/db.json", newNoteList, function(error) {
@@ -39,13 +36,19 @@ app.post("/api/notes", function(req, res) {
 app.get("/api/notes", function(req, res){
     fs.readFile("./db/db.json", "utf8", function(error, data){
         if (error) throw error;
-        res.json(JSON.parse(data));
+        const newData = JSON.parse(data);
+        // Loop over data (array), and create a new key value pair with a property 'id', and a value of the index of each individual note object
+        newData.map(note => {
+            note.id = newData.indexOf(note);
+        });
+        res.json(newData);
     })
 })
 
 // Delete requests will go here
-// Something to do with id -> path: /api/notes/:id
-// 
+app.delete("/api/notes/:id", function(req, res){
+    console.log(req.params.id);
+});
 
 // Set listen function on the PORT
 app.listen(PORT, function() {
