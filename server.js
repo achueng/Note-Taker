@@ -48,6 +48,11 @@ app.delete("/api/notes/:id", function(req, res){
     const noteId = req.params.id;
     console.log(noteId);
 
+    fs.readFile("./db/db.json", "utf8", function(error, data){
+        if(error) throw error;
+        const allNotes = JSON.parse(data);
+        console.log(allNotes);
+    })
 }); 
 
 // Set listen function on the PORT
