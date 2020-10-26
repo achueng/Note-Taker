@@ -53,6 +53,7 @@ app.delete("/api/notes/:id", function(req, res){
         const allNotes = JSON.parse(data);
         allNotes.forEach(note => {
             if (note.id == noteId) {
+                allNotes.splice(note.id, 1);
                 console.log(allNotes);
             }
         })
