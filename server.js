@@ -30,7 +30,7 @@ app.post("/api/notes", function(req, res) {
         // Write the new data to db.json
         fs.writeFile("./db/db.json", newNoteList, function(error) {
             if(error) throw error;
-            res.json(newNoteList);
+            res.json(noteList);
         })
     })
 });
@@ -56,7 +56,7 @@ app.delete("/api/notes/:id", function(req, res){
                 allNotes.splice(note.id, 1);
                 fs.writeFile("./db/db.json", JSON.stringify(allNotes), function(error){
                     if(error) throw error;
-                    res.json(JSON.stringify(allNotes));
+                    res.json(allNotes);
                 })
             }
         })
