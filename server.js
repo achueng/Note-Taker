@@ -51,7 +51,11 @@ app.delete("/api/notes/:id", function(req, res){
     fs.readFile("./db/db.json", "utf8", function(error, data){
         if(error) throw error;
         const allNotes = JSON.parse(data);
-        console.log(allNotes);
+        for (let i=0; i<allNotes.length; i++) {
+            if (allNotes[i].id == noteId) {
+                console.log(allNotes[i]);
+            }
+        }
     })
 }); 
 
