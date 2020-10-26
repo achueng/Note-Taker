@@ -40,25 +40,27 @@ app.get("/api/notes", function(req, res){
     fs.readFile("./db/db.json", "utf8", function(error, data){
         if (error) throw error;
         res.json(JSON.parse(data));
-    })
-})
+    });
+});
 
 // Delete requests will go here
 app.delete("/api/notes/:id", function(req, res){
     fs.readFile("./db/db.json", "utf8", function(error, data){
         if(error) throw error;
         const allNotes = JSON.parse(data);
+        // Loop over parsed data, and remove object that has been selected by user from array
         allNotes.forEach(note => {
             if (note.id == req.params.id) {
                 allNotes.splice(note.id, 1);
                 fs.writeFile("./db/db.json", JSON.stringify(allNotes), function(error){
                     if(error) throw error;
+                    // Return new array of data
                     res.json(allNotes);
-                })
-            }
-        })
-    })
-}); 
+                });
+            };
+        });
+    });
+});
 
 // Set listen function on the PORT
 app.listen(PORT, function() {
