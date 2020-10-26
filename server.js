@@ -45,14 +45,11 @@ app.get("/api/notes", function(req, res){
 
 // Delete requests will go here
 app.delete("/api/notes/:id", function(req, res){
-    const noteId = req.params.id;
-    console.log(noteId);
-
     fs.readFile("./db/db.json", "utf8", function(error, data){
         if(error) throw error;
         const allNotes = JSON.parse(data);
         allNotes.forEach(note => {
-            if (note.id == noteId) {
+            if (note.id == req.params.id) {
                 allNotes.splice(note.id, 1);
                 fs.writeFile("./db/db.json", JSON.stringify(allNotes), function(error){
                     if(error) throw error;
